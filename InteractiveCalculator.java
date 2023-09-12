@@ -1,13 +1,23 @@
+import java.util.Scanner;
 import java.io.PrintWriter;
 
-public class QuickCalculator {
+public class InteractiveCalculator {
   public static void main (String[] args) {
     BFCalculator Calculator = new BFCalculator();
     PrintWriter errorPrinter = new PrintWriter(System.out, true);
     PrintWriter pen = new PrintWriter(System.out, true);
+    Scanner sc = new Scanner(System.in);
+    String line = "";
 
-    for (int i = 0; i < args.length; i++){
-      String[] exprParts = args[i].split(" ");
+    
+    // add error-checking in a way that tries not to throw errors so program doesn't
+    // quit for users (so it's not annoying for users)
+
+
+    while ((!line.equals("QUIT"))) {
+      line = sc.nextLine();
+      
+      String[] exprParts = line.split(" ");
   
       if (exprParts[0].equals("STORE")) {
         String registerStr = exprParts[1];
@@ -33,9 +43,14 @@ public class QuickCalculator {
           }
           operatorIndex += 2;
           secondOperandIndex += 2;
+          
         }
-        pen.println(args[i] + " = " + Calculator.result);
+        if (!line.equals("QUIT")) {
+          pen.println(Calculator.result);
+        }
       }
-    }
+    } 
+
+    sc.close();
   }
 }
