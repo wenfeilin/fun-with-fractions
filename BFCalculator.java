@@ -6,6 +6,12 @@ public class BFCalculator {
   BigFraction result;
   BigFraction[] storeArr;
 
+  // constructor
+  public BFCalculator() {
+    this.result = new BigFraction(0, 0);
+    this.storeArr = new BigFraction[26];
+  }
+
   // methods
   public void evaluate (String exp) {
     String[] expressionParts = exp.split(" ");
@@ -20,7 +26,7 @@ public class BFCalculator {
     operand2 = new BigFraction(expressionParts[2]);
     //System.out.println("this?");
 
-    //System.out.println(operand1 + " " + operation + " " + operand2);
+    System.out.println(operand1 + " " + operation + " " + operand2);
 
     //System.out.println("hey");
     switch (operation) {
@@ -38,7 +44,7 @@ public class BFCalculator {
         this.result = operand1.multiply(operand2);
         break;
       default :
-        //System.out.println("error");
+        System.out.println("error");
     }
 
     this.result = this.result.simplify();
@@ -46,7 +52,7 @@ public class BFCalculator {
   }
 
   public void store (char register) {
-    // not implemented yet
+    
   }
 
 }
