@@ -5,7 +5,6 @@ import java.math.BigInteger;
  * 
  * @author Samuel A. Rebelsky
  * @author Wenfei Lin, Madel Sibal
- * @version 1.2 of August 2023
  */
 public class BigFraction {
   // +------------------+---------------------------------------------
@@ -144,9 +143,11 @@ public class BigFraction {
    */
   public String toString() {
     // Special case: It's zero
-    if (this.num.equals(BigInteger.ZERO)) {
+    if (this.denom.equals(BigInteger.ZERO)) {
+      return "undefined";
+    } else if (this.num.equals(BigInteger.ZERO)) {
       return "0";
-    } // if it's zero
+    }// if it's zero
 
     if (this.denom.equals(BigInteger.ONE)) {
       return String.valueOf(this.num);
@@ -211,6 +212,7 @@ public class BigFraction {
     BigInteger resultNumerator;
     BigInteger resultDenominator;
 
+    if (!this.denom.equals(BigInteger.ZERO)) {
     // Find the greatest common divisor to be able to simplify 
     BigInteger gcd = this.num.gcd(this.denom);
 
@@ -221,5 +223,7 @@ public class BigFraction {
 
     // Return the computed product
     return new BigFraction(resultNumerator, resultDenominator);
+    }
+    return new BigFraction(this.num, this.denom);
   } // simplify()
 } // class BigFraction
